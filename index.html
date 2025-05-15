@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Ic3peakverse</title>
+
+  <!-- Inter + JetBrains Mono para contraste -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!--  Scroll-snap page wrapper  -->
+  <div class="viewport">
+    <section class="hero">
+      <article class="card tilt">
+        <h1>Ic3peakverse</h1>
+        <h2>Joshua Arauz</h2>
+        <p>
+          Desarrollador frontend obsesionado con la estética, el rendimiento
+          y el deleite del usuario. Convierto ideas en experiencias web
+          extraordinarias usando React, animaciones de última generación y
+          un stack moderno.
+        </p>
+
+        <h3>Habilidades clave</h3>
+        <ul class="skills">
+          <li>UI Motion</li><li>Responsive&nbsp;Design</li>
+          <li>TypeScript</li><li>React&nbsp;Server&nbsp;Components</li>
+          <li>Node&nbsp;/&nbsp;API&nbsp;Design</li><li>DevOps&nbsp;Lite</li>
+        </ul>
+
+        <footer>© 2025 Ic3peakverse </footer>
+      </article>
+    </section>
+
+    <!--  Seguir deslizando ↓ para demostrar scroll-timeline  -->
+    <section class="showcase">
+      <div class="pin">
+        <h4>Desliza para ver la magia 🔮</h4>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    /* --- Tilt en CSS es limitado; lo hacemos con 8 líneas de JS --- */
+    const tilt = document.querySelector('.tilt');
+    tilt.addEventListener('pointermove', e=>{
+      const {width, height, left, top} = tilt.getBoundingClientRect();
+      const x = e.clientX - left - width/2;
+      const y = e.clientY - top  - height/2;
+      tilt.style.setProperty('--rx',  (+y / height * 10).toFixed(2));
+      tilt.style.setProperty('--ry',  (-x / width  * 10).toFixed(2));
+    });
+    tilt.addEventListener('pointerleave', ()=>tilt.style.cssText='');
+
+    /* --- Fallback para navegadores sin scroll-timeline --- */
+    if (!CSS.supports('animation-timeline: scroll()')) {
+      document.querySelector('.showcase .pin').style.opacity = .25;
+    }
+  </script>
+</body>
+</html>
